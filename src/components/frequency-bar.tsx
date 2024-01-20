@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import NoteIndicator from "./note-indicator";
 
 interface FrequencySliderProps {
   onChange?: (frequency: number) => void;
@@ -128,6 +129,7 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ onChange }) => {
           {isPlaying ? "Stop Sound" : "Play Sound"}
         </button>
       </div>
+      <NoteIndicator frequency={frequency} />
     </div>
   );
 };

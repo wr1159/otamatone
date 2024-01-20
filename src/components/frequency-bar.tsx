@@ -4,10 +4,11 @@ import NoteIndicator from "./note-indicator";
 
 interface FrequencySliderProps {
   changeState: Dispatch<SetStateAction<boolean>>;
+  frequencyPair: number[]
 }
 
-const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
-  const [frequency, setFrequency] = useState(440); // Default frequency
+const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState, frequencyPair }) => {
+  const [frequency, setFrequency] = useState(frequencyPair[0]); // Default frequency
   const [isPlaying, setIsPlaying] = useState(false);
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
 
@@ -48,8 +49,8 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
       const clickPosition =
         event.targetTouches[0].clientY -
         event.currentTarget.getBoundingClientRect().top;
-      const minFrequency = 145;
-      const maxFrequency = 1085;
+      const minFrequency = frequencyPair[0];
+      const maxFrequency = frequencyPair[1];
       const logMinFrequency = Math.log(minFrequency);
       const logMaxFrequency = Math.log(maxFrequency);
       const logFrequency =
@@ -82,8 +83,8 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
     const divHeight = event.currentTarget.offsetHeight;
     const clickPosition =
       event.clientY - event.currentTarget.getBoundingClientRect().top;
-    const minFrequency = 145;
-    const maxFrequency = 1085;
+    const minFrequency = frequencyPair[0];
+    const maxFrequency = frequencyPair[1];
     const logMinFrequency = Math.log(minFrequency);
     const logMaxFrequency = Math.log(maxFrequency);
     const logFrequency =

@@ -10,7 +10,6 @@ export default function Home() {
     <main className="fixed">
       <div className="flex screen flex-col items-center justify-between">
         <Navbar />
-        <h1>Audio Player App</h1>
         <div>
           <FrequencySlider changeState={changeSound} />
           {!soundOn ? (

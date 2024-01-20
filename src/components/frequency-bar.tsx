@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, SetStateAction, Dispatch } from "react";
+import NoteIndicator from "./note-indicator";
 
 interface FrequencySliderProps {
   changeState: Dispatch<SetStateAction<boolean>>;
@@ -113,6 +114,7 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
 
   return (
     <div className="items-center flex flex-col">
+      <NoteIndicator frequency={frequency} />
       <label htmlFor="frequencySlider">Frequency: {frequency} Hz</label>
       <div>
         <button
@@ -132,7 +134,7 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="w-[20.25px] h-[315px] bg-gray-900 dark:bg-black rounded-xl mt-[90px]"
+        className="w-[20.25px] h-[315px] bg-gray-900 dark:bg-black rounded-xl mt-[70px]"
       />
     </div>
   );

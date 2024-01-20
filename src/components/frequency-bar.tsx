@@ -18,8 +18,8 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
   ) => {
     setIsDragging(true);
     handleDivClick(event);
-    setIsPlaying(!isPlaying);
-    changeState(!isPlaying);
+    setIsPlaying(true);
+    changeState(true);
   };
 
   const handleMouseMove = (
@@ -32,12 +32,14 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
 
   const handleMouseUp = () => {
     setIsDragging(false);
-    setIsPlaying(!isPlaying);
-    changeState(!isPlaying);
+    setIsPlaying(false);
+    changeState(false);
   };
 
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     setIsDragging(true);
+    setIsPlaying(true);
+    changeState(true);
   };
 
   const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
@@ -60,6 +62,8 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
 
   const handleTouchEnd = () => {
     setIsDragging(false);
+    setIsPlaying(false);
+    changeState(false);
   };
 
   const handleDivClick = (
@@ -99,7 +103,12 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
       (window as any).webkitAudioContext)();
     const o = context.createOscillator();
     const g = context.createGain();
-    o.type = "square";
+    const real = new Float32Array([0, -1, -1, -1, -1, -1]);
+    const imag = new Float32Array([0, 0.93, 0.82, 0.63, 0.36, 0.14]);
+    let wave = context.createPeriodicWave(real, imag, {
+      disableNormalization: false,
+    });
+    o.setPeriodicWave(wave);
     o.start(0);
     o.frequency.value = frequency;
     o.connect(g);
@@ -120,8 +129,7 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
     <div className="items-center flex flex-col">
       <NoteIndicator frequency={frequency} />
       <label htmlFor="frequencySlider">Frequency: {frequency} Hz</label>
-      <div>
-      </div>
+      <div></div>
       <div
         id="frequencySlider"
         onMouseDown={handleMouseDown}

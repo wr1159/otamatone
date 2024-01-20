@@ -60,7 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body className={cn(inter.className, "bg-primary")}>
+      <body className={cn(inter.className,"bg-secondary")}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

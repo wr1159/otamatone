@@ -18,6 +18,8 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
   ) => {
     setIsDragging(true);
     handleDivClick(event);
+    setIsPlaying(!isPlaying);
+    changeState(!isPlaying);
   };
 
   const handleMouseMove = (
@@ -30,6 +32,8 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
 
   const handleMouseUp = () => {
     setIsDragging(false);
+    setIsPlaying(!isPlaying);
+    changeState(!isPlaying);
   };
 
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
@@ -117,14 +121,6 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
       <NoteIndicator frequency={frequency} />
       <label htmlFor="frequencySlider">Frequency: {frequency} Hz</label>
       <div>
-        <button
-          onClick={() => {
-            setIsPlaying(!isPlaying);
-            changeState(!isPlaying);
-          }}
-        >
-          {isPlaying ? "Stop Sound" : "Play Sound"}
-        </button>
       </div>
       <div
         id="frequencySlider"
@@ -134,7 +130,7 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="w-[20.25px] h-[315px] bg-gray-900 dark:bg-black rounded-xl mt-[70px]"
+        className="w-[20.25px] h-[315px] bg-gray-900 dark:bg-black rounded-xl mt-[105px]"
       />
     </div>
   );

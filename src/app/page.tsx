@@ -34,7 +34,9 @@ export default function Home() {
             />
           )}
         </div>
-        <div className="relative top-[150px] flex flex-row w-[30vw] justify-between">
+        <div 
+          className="relative top-[150px] flex flex-row justify-between"
+          style={{ width: "max(250px, 30vw)" }}>
             <Button onClick={() => changeFrequencies([679,3800])}>High</Button>
             <Button onClick={() => changeFrequencies([145,1085])}>Medium</Button>
             <Button onClick={() => changeFrequencies([45,277])}>Low</Button>

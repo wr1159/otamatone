@@ -114,8 +114,8 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
 
   return (
     <div className="items-center flex flex-col">
-      <label htmlFor="frequencySlider">Frequency: {frequency} Hz</label>
       <NoteIndicator frequency={frequency} />
+      <label htmlFor="frequencySlider">Frequency: {frequency} Hz</label>
       <div>
         <button
           onClick={() => {
@@ -134,7 +134,7 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="w-[20.25px] h-[315px] bg-gray-900 dark:bg-black rounded-xl mt-[90px]"
+        className="w-[20.25px] h-[315px] bg-gray-900 dark:bg-black rounded-xl mt-[70px]"
       />
     </div>
   );

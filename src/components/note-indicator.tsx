@@ -79,7 +79,7 @@ const NoteIndicator: React.FC<NoteIndicatorProps> = ({ frequency }) => {
   const note = getNoteByFrequency(frequency);
 
   return (
-    <div className="rounded-md bg-muted text-primary w-12 h-12 text-sm break-all p-1 text-center flex justify-center items-center">
+    <div className="rounded-md bg-muted text-primary w-12 h-12 text-sm break-all p-1 text-center flex justify-center items-center border">
       {note ? (
         <div>
           <h2>{note.name}</h2>

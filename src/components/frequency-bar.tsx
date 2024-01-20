@@ -55,8 +55,7 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ onChange }) => {
   };
 
   return (
-    <div>
-      <label htmlFor="frequencySlider">Frequency: {frequency} Hz</label>
+    <div className = "relative left-0">
       <input
         type="range"
         id="frequencySlider"

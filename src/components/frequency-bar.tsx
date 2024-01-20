@@ -2,11 +2,10 @@
 import React, { useState, useEffect, SetStateAction, Dispatch } from "react";
 
 interface FrequencySliderProps {
-  onChange?: (frequency: number) => void;
-  changeState : Dispatch<SetStateAction<Boolean>>
+  changeState: Dispatch<SetStateAction<boolean>>;
 }
 
-const FrequencySlider: React.FC<FrequencySliderProps> = ({ onChange, changeState}) => {
+const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
   const [frequency, setFrequency] = useState(440); // Default frequency
   const [isPlaying, setIsPlaying] = useState(false);
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
@@ -112,12 +111,15 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ onChange, changeState
   };
 
   return (
-
     <div className="items-center flex flex-col">
       <label htmlFor="frequencySlider">Frequency: {frequency} Hz</label>
       <div>
-        <button onClick={() => {setIsPlaying(!isPlaying)
-        changeState(!isPlaying)}}>
+        <button
+          onClick={() => {
+            setIsPlaying(!isPlaying);
+            changeState(!isPlaying);
+          }}
+        >
           {isPlaying ? "Stop Sound" : "Play Sound"}
         </button>
       </div>

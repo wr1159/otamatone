@@ -12,26 +12,27 @@ export default function Home() {
         <Navbar />
         <h1>Audio Player App</h1>
         <div>
-      <FrequencySlider onChange={function (frequency: number): void {} } changeState = {changeSound} />
-      {!soundOn ?
-        <Image
-        src="/closedMouth.png"
-        alt = "resting position"
-        width = {150}
-        height = {40}
-        className = "absolute -z-10 top-[150px]"
-        style={{ left: 'calc(50vw - 50px)' }}
-        /> :
-        <Image
-        src="/openMouth.png"
-        alt = "resting position"
-        width = {150}
-        height = {40}
-        className = "absolute -z-10 top-[150px]"
-        style={{ left: 'calc(50vw - 50px)' }}
-        /> }
-      </div>
-
+          <FrequencySlider changeState={changeSound} />
+          {!soundOn ? (
+            <Image
+              src="/closedMouth.png"
+              alt="resting position"
+              width={150}
+              height={40}
+              className="absolute -z-10 top-[150px]"
+              style={{ left: "calc(50vw - 50px)" }}
+            />
+          ) : (
+            <Image
+              src="/openMouth.png"
+              alt="resting position"
+              width={150}
+              height={40}
+              className="absolute -z-10 top-[150px]"
+              style={{ left: "calc(50vw - 50px)" }}
+            />
+          )}
+        </div>
       </div>
     </main>
   );

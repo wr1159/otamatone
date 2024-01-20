@@ -10,16 +10,72 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ onChange }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
 
-  const handleFrequencyChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleMouseDown = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
-    const newFrequency = parseInt(event.target.value, 10);
+    setIsDragging(true);
+    handleDivClick(event);
+  };
+
+  const handleMouseMove = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    if (isDragging) {
+      handleDivClick(event);
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (isDragging) {
+      const divHeight = event.currentTarget.offsetHeight;
+      const clickPosition =
+        event.targetTouches[0].clientY -
+        event.currentTarget.getBoundingClientRect().top;
+      const minFrequency = 145;
+      const maxFrequency = 1085;
+      const logMinFrequency = Math.log(minFrequency);
+      const logMaxFrequency = Math.log(maxFrequency);
+      const logFrequency =
+        (clickPosition / divHeight) * (logMaxFrequency - logMinFrequency) +
+        logMinFrequency;
+      const newFrequency = Math.round(Math.exp(logFrequency));
+      setFrequency(newFrequency);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
+  const handleDivClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    const divHeight = event.currentTarget.offsetHeight;
+    const clickPosition =
+      event.clientY - event.currentTarget.getBoundingClientRect().top;
+    const minFrequency = 145;
+    const maxFrequency = 1085;
+    const logMinFrequency = Math.log(minFrequency);
+    const logMaxFrequency = Math.log(maxFrequency);
+    const logFrequency =
+      (clickPosition / divHeight) * (logMaxFrequency - logMinFrequency) +
+      logMinFrequency;
+    const newFrequency = Math.round(Math.exp(logFrequency));
     setFrequency(newFrequency);
   };
 
   useEffect(() => {
     // Trigger the parent component's onChange callback when the frequency changes
-    console.log("oscillator", oscillator);
     if (oscillator) {
       oscillator.frequency.value = frequency;
     }
@@ -55,18 +111,18 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ onChange }) => {
   };
 
   return (
-    <div>
-      <label htmlFor="frequencySlider">Frequency: {frequency} Hz</label>
-      <input
-        type="range"
+    <div className="items-center flex flex-col">
+      <div
         id="frequencySlider"
-        min="20"
-        max="2000"
-        step="1"
-        value={frequency}
-        onChange={handleFrequencyChange}
-        style={{ transform: "rotate(270deg)" }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        className="w-10 h-80 sm:h-10 xl:h-[36rem] bg-gray-900 dark:bg-white rounded-xl"
       />
+      <label htmlFor="frequencySlider">Frequency: {frequency} Hz</label>
       <div>
         <button onClick={() => setIsPlaying(!isPlaying)}>
           {isPlaying ? "Stop Sound" : "Play Sound"}

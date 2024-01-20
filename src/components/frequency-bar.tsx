@@ -94,7 +94,7 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
       (window as any).webkitAudioContext)();
     const o = context.createOscillator();
     const g = context.createGain();
-    o.type = "sawtooth";
+    o.type = "square";
     o.start(0);
     o.frequency.value = frequency;
     o.connect(g);

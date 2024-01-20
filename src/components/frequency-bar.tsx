@@ -94,6 +94,7 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
       (window as any).webkitAudioContext)();
     const o = context.createOscillator();
     const g = context.createGain();
+    o.type = "sawtooth";
     o.start(0);
     o.frequency.value = frequency;
     o.connect(g);
@@ -131,7 +132,7 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="w-[15px] h-[200px] bg-gray-900 dark:bg-white rounded-xl mt-[100px]"
+        className="w-[20.25px] h-[315px] bg-gray-900 dark:bg-black rounded-xl mt-[90px]"
       />
     </div>
   );

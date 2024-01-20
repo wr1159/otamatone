@@ -17,19 +17,19 @@ export default function Home() {
             <Image
               src="/closedMouth.png"
               alt="resting position"
-              width={150}
-              height={40}
-              className="absolute -z-10 top-[150px]"
-              style={{ left: "calc(50vw - 50px)" }}
+              width={202.5}
+              height={54}
+              className="absolute -z-10 top-[160px]"
+              style={{ left: "calc(50vw - 69px)" }}
             />
           ) : (
             <Image
               src="/openMouth.png"
               alt="resting position"
-              width={150}
-              height={40}
-              className="absolute -z-10 top-[150px]"
-              style={{ left: "calc(50vw - 50px)" }}
+              width={202.5}
+              height={54}
+              className="absolute -z-10 top-[160px]"
+              style={{ left: "calc(50vw - 69px)" }}
             />
           )}
         </div>

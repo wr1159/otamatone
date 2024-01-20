@@ -1,12 +1,12 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, SetStateAction, Dispatch } from "react";
 import NoteIndicator from "./note-indicator";
 
 interface FrequencySliderProps {
-  onChange?: (frequency: number) => void;
+  changeState: Dispatch<SetStateAction<boolean>>;
 }
 
-const FrequencySlider: React.FC<FrequencySliderProps> = ({ onChange }) => {
+const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
   const [frequency, setFrequency] = useState(440); // Default frequency
   const [isPlaying, setIsPlaying] = useState(false);
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
@@ -95,6 +95,7 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ onChange }) => {
       (window as any).webkitAudioContext)();
     const o = context.createOscillator();
     const g = context.createGain();
+    o.type = "square";
     o.start(0);
     o.frequency.value = frequency;
     o.connect(g);
@@ -113,6 +114,18 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ onChange }) => {
 
   return (
     <div className="items-center flex flex-col">
+      <label htmlFor="frequencySlider">Frequency: {frequency} Hz</label>
+      <NoteIndicator frequency={frequency} />
+      <div>
+        <button
+          onClick={() => {
+            setIsPlaying(!isPlaying);
+            changeState(!isPlaying);
+          }}
+        >
+          {isPlaying ? "Stop Sound" : "Play Sound"}
+        </button>
+      </div>
       <div
         id="frequencySlider"
         onMouseDown={handleMouseDown}
@@ -121,15 +134,8 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ onChange }) => {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="w-10 h-80 sm:h-10 xl:h-[36rem] bg-gray-900 dark:bg-white rounded-xl"
+        className="w-[20.25px] h-[315px] bg-gray-900 dark:bg-black rounded-xl mt-[90px]"
       />
-      <label htmlFor="frequencySlider">Frequency: {frequency} Hz</label>
-      <div>
-        <button onClick={() => setIsPlaying(!isPlaying)}>
-          {isPlaying ? "Stop Sound" : "Play Sound"}
-        </button>
-      </div>
-      <NoteIndicator frequency={frequency} />
     </div>
   );
 };

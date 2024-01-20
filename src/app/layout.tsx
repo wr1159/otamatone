@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
 import Navbar from "@/components/navbar";
+import { cn } from "@/lib/utils";
 
 const APP_NAME = "Otamatone App";
 const APP_DEFAULT_TITLE = "My Awesome Otamatone App";
@@ -45,7 +46,6 @@ export const metadata: Metadata = {
     },
     description: APP_DESCRIPTION,
   },
-
 };
 
 export const viewport: Viewport = {
@@ -60,7 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body className={inter.className}>
+      <body className={cn(inter.className,"bg-secondary")}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

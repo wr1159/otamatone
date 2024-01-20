@@ -62,6 +62,16 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
     setIsDragging(false);
   };
 
+  const handleMouseLeave = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+    ) => {
+      setIsPlaying(false)
+      changeState(false)
+      if (isDragging) {
+        handleDivClick(event);
+      }
+    }
+
   const handleDivClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -130,6 +140,7 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState }) => {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onMouseLeave={handleMouseLeave}
         className="w-[20.25px] h-[315px] bg-gray-900 dark:bg-black rounded-xl mt-[105px]"
       />
     </div>

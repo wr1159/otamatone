@@ -4,10 +4,13 @@ import NoteIndicator from "./note-indicator";
 
 interface FrequencySliderProps {
   changeState: Dispatch<SetStateAction<boolean>>;
-  frequencyPair: number[]
+  frequencyPair: number[];
 }
 
-const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState, frequencyPair }) => {
+const FrequencySlider: React.FC<FrequencySliderProps> = ({
+  changeState,
+  frequencyPair,
+}) => {
   const [frequency, setFrequency] = useState(frequencyPair[0]); // Default frequency
   const [isPlaying, setIsPlaying] = useState(false);
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
@@ -70,13 +73,13 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState, frequenc
 
   const handleMouseLeave = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
-    ) => {
-      setIsPlaying(false)
-      changeState(false)
-      if (isDragging) {
-        handleDivClick(event);
-      }
+  ) => {
+    setIsPlaying(false);
+    changeState(false);
+    if (isDragging) {
+      handleDivClick(event);
     }
+  };
 
   const handleDivClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -95,12 +98,11 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState, frequenc
     setFrequency(newFrequency);
   };
 
-  const handleDivTouch = (
-    event: React.TouchEvent<HTMLDivElement>
-  ) => {
+  const handleDivTouch = (event: React.TouchEvent<HTMLDivElement>) => {
     const divHeight = event.currentTarget.offsetHeight;
     const clickPosition =
-      event.touches[0].clientY - event.currentTarget.getBoundingClientRect().top;
+      event.touches[0].clientY -
+      event.currentTarget.getBoundingClientRect().top;
     const minFrequency = frequencyPair[0];
     const maxFrequency = frequencyPair[1];
     const logMinFrequency = Math.log(minFrequency);
@@ -111,14 +113,13 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState, frequenc
     const newFrequency = Math.round(Math.exp(logFrequency));
     setFrequency(newFrequency);
   };
-  
 
   useEffect(() => {
     // Trigger the parent component's onChange callback when the frequency changes
-    if(frequency < frequencyPair[0] || frequency>frequencyPair[1]) {
-      setIsPlaying(false)
-      setIsDragging(false)
-      changeState(false)
+    if (frequency < frequencyPair[0] || frequency > frequencyPair[1]) {
+      setIsPlaying(false);
+      setIsDragging(false);
+      changeState(false);
     }
     if (oscillator) {
       oscillator.frequency.value = frequency;
@@ -164,7 +165,6 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState, frequenc
     <div className="items-center flex flex-col">
       <NoteIndicator frequency={frequency} />
       <label htmlFor="frequencySlider">Frequency: {frequency} Hz</label>
-      <div></div>
       <div
         id="frequencySlider"
         onMouseDown={handleMouseDown}
@@ -174,7 +174,6 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({ changeState, frequenc
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         onMouseLeave={handleMouseLeave}
-        
         className="w-[20.25px] h-[315px] bg-gray-900 dark:bg-black rounded-xl mt-[105px]"
       />
     </div>

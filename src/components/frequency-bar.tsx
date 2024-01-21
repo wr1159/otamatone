@@ -1,15 +1,18 @@
 "use client";
 import React, { useState, useEffect, SetStateAction, Dispatch } from "react";
 import NoteIndicator from "./note-indicator";
+import { cn } from "@/lib/utils";
 
 interface FrequencySliderProps {
   changeState: Dispatch<SetStateAction<boolean>>;
   frequencyPair: number[];
+  className?: string;
 }
 
 const FrequencySlider: React.FC<FrequencySliderProps> = ({
   changeState,
   frequencyPair,
+  className,
 }) => {
   const [frequency, setFrequency] = useState(frequencyPair[0]); // Default frequency
   const [isPlaying, setIsPlaying] = useState(false);
@@ -174,7 +177,10 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         onMouseLeave={handleMouseLeave}
-        className="w-[20.25px] h-[315px] bg-gray-900 dark:bg-black rounded-xl mt-[105px]"
+        className={cn(
+          "w-[20.25px] h-[315px] bg-gray-900 dark:bg-black rounded-xl mt-[50px]",
+          className
+        )}
       />
     </div>
   );

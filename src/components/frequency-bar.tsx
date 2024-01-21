@@ -6,12 +6,14 @@ import { cn } from "@/lib/utils";
 interface FrequencySliderProps {
   changeState: Dispatch<SetStateAction<boolean>>;
   frequencyPair: number[];
+  playMode?: boolean;
   className?: string;
 }
 
 const FrequencySlider: React.FC<FrequencySliderProps> = ({
   changeState,
   frequencyPair,
+  playMode = true,
   className,
 }) => {
   const [frequency, setFrequency] = useState(frequencyPair[0]); // Default frequency
@@ -178,7 +180,8 @@ const FrequencySlider: React.FC<FrequencySliderProps> = ({
         onTouchEnd={handleTouchEnd}
         onMouseLeave={handleMouseLeave}
         className={cn(
-          "w-[20.25px] h-[315px] bg-gray-900 dark:bg-black rounded-xl mt-[50px]",
+          "w-[20.25px] h-[315px] bg-gray-900 rounded-xl mt-[50px]",
+          !playMode && "dark:bg-gray-400",
           className
         )}
       />

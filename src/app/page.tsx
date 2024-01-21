@@ -45,6 +45,7 @@ export default function Home() {
             <FrequencySlider
               changeState={changeSound}
               frequencyPair={frequencies}
+              playMode={playMode}
               className={"h-[70vh] w-screen mt-0 mb-0"}
             />
           </div>
